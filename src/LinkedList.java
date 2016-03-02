@@ -1,6 +1,6 @@
 public class LinkedList<Type>{
     private int length;
-    private Node first;
+    protected Node first;
     private Node last;
 
     public LinkedList() {
@@ -23,6 +23,7 @@ public class LinkedList<Type>{
             first = element;
             last = element;
         }else {
+            element.previous = last;
             last.next = element;
             last = element;
         }
@@ -31,11 +32,11 @@ public class LinkedList<Type>{
 
     public void add(Type o){ addLast(o);}
 
-    public boolean contains(Type o) {
+    public boolean contains(Object o) {
         return indexOf(o) != -1 ;
     }
 
-    public int indexOf(Type o) {
+    public int indexOf(Object o) {
         int index = 0;
         Node element = first;
         while(element!=null) {
@@ -57,5 +58,52 @@ public class LinkedList<Type>{
             i++;
         }
         return element.value;
+    }
+
+    public ListIter<Type> listIterator(int index) {
+        return new ListIter<>(this,index);
+    }
+
+    public boolean removeElement(Object toBeDeleted) {
+        Node element = first;
+        while(element!=null) {
+            if(element.equals(new Node<>(toBeDeleted))) {
+                if(element.equals(first))
+                    removeFirst();
+                else if(element.equals(last))
+                    removeLast();
+                else{
+                    element.previous.next = element.next;
+                    element.next.previous = element.previous;
+                }
+                return true;
+            }
+            element = element.next;
+        }
+        return false;
+    }
+
+    public Object removeFirst() {
+        if(first!=null) {
+            Object deleted = first.value;
+            first = first.next;
+            first.previous = null;
+            return deleted;
+        }
+        return null;
+    }
+
+    public Object removeLast() {
+        if(last!=null) {
+            Object deleted = last.value;
+            last = last.previous;
+            last.next = null;
+            return deleted;
+        }
+        return null;
+    }
+
+    public Object remove() {
+        return removeFirst();
     }
 }

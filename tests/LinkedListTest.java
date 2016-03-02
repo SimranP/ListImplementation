@@ -1,5 +1,8 @@
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class LinkedListTest {
     @Test
@@ -42,7 +45,6 @@ public class LinkedListTest {
     public void get_returns_the_element_on_given_index() throws Exception {
         LinkedList<String> linkedList = new LinkedList<>();
         linkedList.add("firstNode");
-
         linkedList.add("secondNode");
         assertEquals(linkedList.get(0),"firstNode");
         assertEquals(linkedList.get(1),"secondNode");
@@ -68,5 +70,57 @@ public class LinkedListTest {
         LinkedList<String> linkedList = new LinkedList<>();
         linkedList.add("firstNode");
         assertEquals(false,linkedList.isEmpty());
+    }
+
+    @Test
+    public void removeFirst_removes_the_first_element_from_the_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("firstNode");
+        list.add("secondNode");
+        list.removeFirst();
+        assertFalse(list.contains("firstNode"));
+    }
+
+    @Test
+    public void removeLast_does_nothing_when_there_is_no_element() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        assertEquals(null,list.removeLast());
+    }
+
+    @Test
+    public void removeFirst_does_nothing_when_there_is_no_element() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        assertEquals(null,list.removeFirst());
+    }
+
+    @Test
+    public void removeLast_removes_the_last_element_from_the_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("firstNode");
+        list.add("secondNode");
+        assertEquals("secondNode",list.removeLast());
+    }
+
+    @Test
+    public void remove_removes_the_first_element_from_the_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("firstNode");
+        list.add("secondNode");
+        assertEquals("firstNode",list.remove());
+    }
+
+    @Test
+    public void removeElement_removes_the_first_occurrence_of_the_given_element_from_the_list_and_returns_true() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("firstNode");
+        list.add("secondNode");
+        assertTrue(list.removeElement("firstNode"));
+    }
+
+    @Test
+    public void removeElement_returns_false_if_the_given_element_is_not_in__the_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("secondNode");
+        assertFalse(list.removeElement("firstNode"));
     }
 }

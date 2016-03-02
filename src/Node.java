@@ -1,10 +1,12 @@
 public class Node<Type> {
+    public Node previous;
     public Type value;
     public Node next;
 
-    public Node(Type value) {
-        this.value = value;
-        this.next = null;
+    public Node(Type v) {
+        value = v;
+        next = null;
+        previous = null;
     }
 
     @Override
