@@ -106,4 +106,16 @@ public class LinkedList<Type>{
     public Object remove() {
         return removeFirst();
     }
+
+    public Object peekFirst() {
+        return first.value;
+    }
+
+    public Object peekLast() {
+        return last.value;
+    }
+
+    public Object peek() {
+        return peekFirst();
+    }
 }

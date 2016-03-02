@@ -123,4 +123,24 @@ public class LinkedListTest {
         list.add("secondNode");
         assertFalse(list.removeElement("firstNode"));
     }
+
+    @Test
+    public void peek_gives_the_first_element_from_the_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("firstNode");
+        assertEquals("firstNode",list.peek());
+    }
+    @Test
+    public void peekFirst_gives_the_first_element_from_the_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("firstNode");
+        assertEquals("firstNode",list.peekFirst());
+    }
+
+    @Test
+    public void peekLast_gives_the_first_element_from_the_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("firstNode");
+        assertEquals("firstNode",list.peekLast());
+    }
 }
