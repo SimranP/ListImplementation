@@ -3,11 +3,7 @@ public class LinkedList<Type>{
     protected Node first;
     private Node last;
 
-    public LinkedList() {
-        length = 0;
-        first = null;
-        last = null;
-    }
+    public LinkedList() {}
 
     public int size() {
         return length;
@@ -39,17 +35,20 @@ public class LinkedList<Type>{
     public int indexOf(Object o) {
         int index = 0;
         Node element = first;
+        Node<Object> objectNode = new Node<>(o);
         while(element!=null) {
-            if(element.equals(new Node<>(o)))
+            if(element.equals(objectNode))
                 return index;
             index++;
             element = element.next;
         }
         return -1;
     }
-
+    private boolean isInvalid(int index){
+        return index < 0 || index >= size();
+    };
     public Object get(int index) {
-        if(index < 0 || index >= size())
+        if(isInvalid(index))
             throw new IndexOutOfBoundsException("index: "+index + " doesn't exist.");
         Node element = first;
         int i = 0 ;
@@ -61,13 +60,16 @@ public class LinkedList<Type>{
     }
 
     public ListIter<Type> listIterator(int index) {
+        if(isInvalid(index))
+            throw new IndexOutOfBoundsException("Iteration can't proceed from index: "+ index);
         return new ListIter<>(this,index);
     }
 
-    public boolean removeElement(Object toBeDeleted) {
+    public boolean removeElement(Object o) {
         Node element = first;
+        Node<Object> toBeDeleted = new Node<>(o);
         while(element!=null) {
-            if(element.equals(new Node<>(toBeDeleted))) {
+            if(element.equals(toBeDeleted)) {
                 if(element.equals(first))
                     removeFirst();
                 else if(element.equals(last))
@@ -108,10 +110,14 @@ public class LinkedList<Type>{
     }
 
     public Object peekFirst() {
+        if(first==null)
+            return null;
         return first.value;
     }
 
     public Object peekLast() {
+        if(last==null)
+            return null;
         return last.value;
     }
 

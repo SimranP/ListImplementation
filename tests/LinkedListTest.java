@@ -143,4 +143,24 @@ public class LinkedListTest {
         list.add("firstNode");
         assertEquals("firstNode",list.peekLast());
     }
+
+    @Test
+    public void peekLast_gives_null_for_an_empty_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        assertEquals(null,list.peekLast());
+    }
+
+    @Test
+    public void peekFirst_gives_null_for_an_empty_list() throws Exception {
+        LinkedList<String> list = new LinkedList<>();
+        assertEquals(null,list.peekFirst());
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void listIterator_throws_index_out_of_bound_exception_if_given_index_is_invalid() throws Exception {
+        LinkedList<String> linkedList = new LinkedList<>();
+        linkedList.add("firstNode");
+        linkedList.add("secondNode");
+        linkedList.listIterator(2);
+    }
 }
